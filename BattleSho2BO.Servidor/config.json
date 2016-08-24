@@ -1,0 +1,8 @@
+{
+  "PortBD":"3306",
+  "IP":"localhost",
+  "NomBD":"dpo2",
+  "Usuari":"root",
+  "Password":"",
+  "PortC":"5200"
+}
