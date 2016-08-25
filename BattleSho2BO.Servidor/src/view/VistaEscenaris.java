@@ -5,16 +5,12 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
+
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.ButtonsController;
@@ -38,7 +34,7 @@ public class VistaEscenaris extends JDialog {
 	public VistaEscenaris() throws SQLException {
 		
 		setTitle("ESCENARIS");
-		setBounds(100, 100, 600, 500);
+		setBounds(100, 100, 600, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		
@@ -93,8 +89,6 @@ public class VistaEscenaris extends JDialog {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
-		
 		 
 		 return jtTable;
 		

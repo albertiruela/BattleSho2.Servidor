@@ -139,6 +139,21 @@ public class ConectorDB {
 	        }
 	    	
 	    }
+	  
+	  public static boolean insertMap(String nom, String path){
+
+	        String query = new String("INSERT INTO escenaris (Nom,Path) VALUES ('"+nom+"','"+path+"');");
+	    	try {
+	            s =(Statement) conn.createStatement();
+	            s.executeUpdate(query);
+
+	        } catch (SQLException ex) {
+	        	ex.printStackTrace();
+	            System.out.println("Problema al Inserir el mapa: " + ex.getSQLState());
+	            return false;
+	        }
+	    	return true;
+	    }
 	 
 	 
 	 public void disconnect(){
@@ -148,6 +163,8 @@ public class ConectorDB {
 				System.out.println("Problema al tancar la connexio --> " + e.getSQLState());
 			}
 	    }
+	 
+	 
 	
 	
 }

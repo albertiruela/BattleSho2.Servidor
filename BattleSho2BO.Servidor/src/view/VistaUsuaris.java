@@ -31,7 +31,7 @@ public class VistaUsuaris extends JDialog {
 	public VistaUsuaris() throws SQLException {
 		
 		setTitle("USUARIS");
-		setBounds(100, 100, 600, 500);
+		setBounds(100, 100, 600, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		

@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import view.MainViewS;
+import view.VistaAfegirMapa;
 import view.VistaUsuaris;
 import view.VistaEscenaris;
 
@@ -65,6 +66,8 @@ public class ButtonsController implements ActionListener {
 		
 		if(e.getActionCommand().equals("AFEGIRMAPA")){
 			System.out.println("AFEGIRMAPA");
+			VistaAfegirMapa vam = new VistaAfegirMapa();
+			vam.setVisible(true);
 		}
 	}
 	
