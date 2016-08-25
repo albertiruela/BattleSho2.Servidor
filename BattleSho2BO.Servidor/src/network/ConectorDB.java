@@ -98,7 +98,7 @@ public class ConectorDB {
 	            rs = s.executeQuery (query);
 	            
 	        } catch (SQLException ex) {
-	            System.out.println("Problema al Recuperar les dades --> " + ex.getSQLState());
+	            System.out.println("Problema al recuperar el usuari: " + ex.getSQLState());
 	        }
 			return rs;
 	    }
@@ -111,6 +111,31 @@ public class ConectorDB {
 	             
 	        } catch (SQLException ex) {
 	            System.out.println("Problema al Actualitzar Data : " + ex.getSQLState());
+	        }
+	    	
+	    }
+	  
+	  public static ResultSet selectAllMaps(){
+	    	ResultSet rs = null;
+	    	String query = new String("SELECT * FROM escenaris");
+	    	try {
+	            s =(Statement) conn.createStatement();
+	            rs = s.executeQuery (query);
+	            
+	        } catch (SQLException ex) {
+	            System.out.println("Problema al Recuperar els escenaris:" + ex.getSQLState());
+	        }
+			return rs;
+	    }
+	  
+	  public static void deleteMap(String nom){
+	    	String query = new String("DELETE FROM escenaris WHERE Nom='"+nom+"'");
+	    	try {
+	            s =(Statement) conn.createStatement();
+	            s.executeUpdate(query);
+	             
+	        } catch (SQLException ex) {
+	            System.out.println("Problema al Eliminar el mapa : " + ex.getSQLState());
 	        }
 	    	
 	    }

@@ -2,31 +2,24 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JTable;
-
-import java.sql.ResultSet;
 
 
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+
+
 import java.sql.SQLException;
-import java.sql.Statement;
 
-import network.ConectorDB;
 import view.MainViewS;
 import view.VistaUsuaris;
+import view.VistaEscenaris;
 
 
 public class ButtonsController implements ActionListener {
 
 	private static MainViewS view;
 	private VistaUsuaris vistaUsuaris;
+	private VistaEscenaris vistaEscenaris;
 	
 	public ButtonsController(MainViewS view, VistaUsuaris vistaUsuaris){
 		
@@ -53,6 +46,21 @@ public class ButtonsController implements ActionListener {
 			MouseClickTable mct = new MouseClickTable();
 			vistaUsuaris.registerControllers(mct);
 			vistaUsuaris.setVisible(true);
+		}
+		
+		if(e.getActionCommand().equals("ESCENARIS")){
+			
+			VistaEscenaris vistaEscenaris = null;
+			try {
+				vistaEscenaris = new VistaEscenaris();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			MouseClickTable mct = new MouseClickTable();
+			vistaEscenaris.registerControllers(mct);
+			vistaEscenaris.setVisible(true);
 		}
 			
 		

@@ -24,11 +24,12 @@ public class MouseClickTable implements MouseListener {
 		JTable taula = ((JTable)e.getComponent());
 		int row = taula.rowAtPoint(e.getPoint());
 		if(row > 0){
-			String nickname = (String)taula.getModel().getValueAt(row, 0);
+			String cadena = (String)taula.getModel().getValueAt(row, 0);
 		
-			int reply = JOptionPane.showConfirmDialog(taula, "Segur que vols eliminar "+nickname+"?");
+			int reply = JOptionPane.showConfirmDialog(taula, "Segur que vols eliminar "+cadena+"?");
 			if( reply == JOptionPane.YES_OPTION){
-				ConectorDB.deleteUser(nickname);
+				ConectorDB.deleteUser(cadena);
+				ConectorDB.deleteMap(cadena);
 				((DefaultTableModel) taula.getModel()).removeRow(row);
 				taula.revalidate();
 				taula.repaint();
