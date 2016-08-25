@@ -57,13 +57,15 @@ public class ButtonsController implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
 			MouseClickTable mct = new MouseClickTable();
 			vistaEscenaris.registerControllers(mct);
 			vistaEscenaris.setVisible(true);
+			vistaEscenaris.registerControllers1(this);
 		}
-			
 		
+		if(e.getActionCommand().equals("AFEGIRMAPA")){
+			System.out.println("AFEGIRMAPA");
+		}
 	}
 	
 	

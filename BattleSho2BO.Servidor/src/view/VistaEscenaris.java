@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -25,8 +26,14 @@ import network.ConectorDB;
 public class VistaEscenaris extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private JPanel jpAfegir = new JPanel(new GridLayout(1,2));
+	
 	private JTable jtTaula = new JTable(); 
 	private ResultSet rs ;
+	
+	private JButton jbAfegir0 = new JButton (""); 
+	private JButton jbAfegir1 = new JButton ("Afegir Mapa"); 
+	
 	
 	public VistaEscenaris() throws SQLException {
 		
@@ -35,16 +42,31 @@ public class VistaEscenaris extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		
+		jpAfegir.add(jbAfegir0);
+		jpAfegir.add(jbAfegir1);
+		
+		jbAfegir0.setVisible(false);
+		jbAfegir1.setVisible(true);
+		
+		
+		
 		rs = ConectorDB.selectAllMaps();
 		jtTaula = fesTaula(rs);
 		add(jtTaula, BorderLayout.CENTER);
+		add(jpAfegir, BorderLayout.SOUTH);
 	}
 	
 	public void registerControllers(MouseClickTable mct){
 		
 		this.jtTaula.addMouseListener(mct);
-			
+				
 	}
+	
+	public void registerControllers1(ButtonsController bc){
+		jbAfegir1.setActionCommand("AFEGIRMAPA");
+		jbAfegir1.addActionListener(bc);
+	}
+	
 	public JTable fesTaula(ResultSet rs) {
 		
 		 JTable jtTable = new JTable();
