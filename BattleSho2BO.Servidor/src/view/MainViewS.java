@@ -87,11 +87,7 @@ public class MainViewS extends JFrame {
 		
 		jbEscenaris.setActionCommand("ESCENARIS");
 		jbEscenaris.addActionListener(controller);
-		
-		
-		
-		//jbEscenaris.addActionListener(controller);
-			
+					
 	}
 	
 	

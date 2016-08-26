@@ -8,6 +8,10 @@ import java.sql.SQLException;
 
 
 
+
+
+import javax.swing.JOptionPane;
+
 import controller.ButtonsController;
 import network.ConectorDB;
 
@@ -29,12 +33,14 @@ public class Logica {
 		
 		System.out.println(info[0]);
 		System.out.println(info[1]);
-		if(checkPassword(info[1])){
-			if (ConectorDB.insertUser(info[0],info[1])){
-				ok = true;
+		if(checkUserExists(info[0])){
+			
+			if(checkPassword(info[1])){
+				if (ConectorDB.insertUser(info[0],info[1])){
+					ok = true;
+				}
 			}
 		}
-	
 		
 		return ok;
 	}
@@ -83,5 +89,23 @@ public class Logica {
 			}
 		}
 		return numeros && lletres;
+	}
+	
+	public static boolean checkUserExists(String nickname){
+		boolean noExisteix = true;
+		ResultSet rs = ConectorDB.selectAllUsers();
+		try {
+			while (rs.next()) {
+				String Nickname = rs.getString("Nickname");
+				if (Nickname.equals(nickname)){
+					noExisteix = false;
+
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return noExisteix;
 	}
 }

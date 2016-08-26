@@ -73,9 +73,7 @@ public class ServerS extends Thread{
 						dataOut.writeUTF("OK");
 					}else{
 						dataOut.writeUTF("KO");
-					}
-					
-					
+					}		
 				}
 				
 				if (message.startsWith("LOG")){

@@ -19,17 +19,12 @@ public class VistaAfegirMapa extends JDialog {
 	
 	public VistaAfegirMapa(){
 		setTitle("Afegir Mapa");
-		setBounds(100, 100, 500, 400);
+		setBounds(100, 100, 1, 1);
 		getContentPane().setLayout(new BorderLayout());
 		setLayout(new FlowLayout());
 		
 		
 		add(jfcEscullMapa);
-		
-		
-	      
-	    
-	 
 		
 	}
 	
@@ -37,10 +32,8 @@ public class VistaAfegirMapa extends JDialog {
 		int returnVal = 0 ;
 		
 		 int status = jfcEscullMapa.showOpenDialog(null);
-		 System.out.println(status);
 		 if(returnVal == JFileChooser.APPROVE_OPTION && status == 0) {
 		 
-		       
 		       return new Fitxer(jfcEscullMapa.getSelectedFile().getPath(), jfcEscullMapa.getSelectedFile().getName());
 		  }
 		 	
