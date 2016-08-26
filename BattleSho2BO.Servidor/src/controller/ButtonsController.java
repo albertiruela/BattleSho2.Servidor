@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 
 import java.sql.SQLException;
 
+import network.ConectorDB;
+import model.Fitxer;
 import view.MainViewS;
 import view.VistaAfegirMapa;
 import view.VistaUsuaris;
@@ -68,6 +70,10 @@ public class ButtonsController implements ActionListener {
 			System.out.println("AFEGIRMAPA");
 			VistaAfegirMapa vam = new VistaAfegirMapa();
 			vam.setVisible(true);
+			Fitxer Tot = VistaAfegirMapa.retornaFitxer();
+			ConectorDB.insertMap(Tot.getNom(), Tot.getPath());
+			
+			
 		}
 	}
 	

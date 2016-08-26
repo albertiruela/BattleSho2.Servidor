@@ -43,7 +43,7 @@ public class MouseClickTable implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("eeeeeei");
+		
 		
 		if( SwingUtilities.isRightMouseButton(e)){
 			doPop(e);
