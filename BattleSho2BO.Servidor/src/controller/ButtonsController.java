@@ -37,6 +37,7 @@ public class ButtonsController implements ActionListener {
 	 * Atribut que fa referencia a la vista amb la taula dels Usuaris.
 	 */
 	private VistaUsuaris vistaUsuaris;
+	private VistaEscenaris vistaEscenaris;
 	
 	
 	public ButtonsController(MainViewS view, VistaUsuaris vistaUsuaris){
@@ -69,7 +70,7 @@ public class ButtonsController implements ActionListener {
 		
 		if(e.getActionCommand().equals("ESCENARIS")){
 			
-			VistaEscenaris vistaEscenaris = null;
+			vistaEscenaris = null;
 			try {
 				vistaEscenaris = new VistaEscenaris();
 			} catch (SQLException e1) {
@@ -91,7 +92,10 @@ public class ButtonsController implements ActionListener {
 			Fitxer Tot = VistaAfegirMapa.retornaFitxer();
 			vam.setVisible(false);
 			ConectorDB.insertMap(Tot.getNom(), Tot.getPath());
-			//repintar la taula actualitzada pero no puc passar la taula d'escenaris
+			if(vistaEscenaris != null){
+				vistaEscenaris.setVisible(false);
+			}
+			
 			
 		}
 	}

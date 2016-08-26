@@ -28,9 +28,9 @@ public class ServerS extends Thread{
 	
 	private ButtonsController controller;
 	
-	public ServerS(int portClient){
+	public ServerS(int PortC){
 		try{
-			sServer = new ServerSocket(5200);
+			sServer = new ServerSocket(PortC);
 			isOn = false;
 		}catch(IOException e){
 			e.printStackTrace();
