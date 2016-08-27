@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Date;
+
 import model.Mapa;
 
-public class Contrincant {
+public class Contrincant implements Serializable {
 
 	private String nom;
 	private Date DataCreacio;

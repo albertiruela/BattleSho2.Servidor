@@ -2,15 +2,20 @@ package network;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.ServerSocket;
+import java.util.LinkedList;
 import java.io.IOException;
 
 
 
 
-import model.Logica;
 
+
+
+import model.Contrincant;
+import model.Logica;
 import controller.ButtonsController;
 
 /**
@@ -47,9 +52,14 @@ public class ServerS extends Thread{
 	 */
 	private ButtonsController controller;
 	/**
+	 * Creem un ObjectOutputStream per passar els contrincants
+	 */
+	private static ObjectOutputStream objectOut;
+	/**
 	 * Creem el socket del servidor
 	 * @param PortC
 	 */
+	
 	public ServerS(int PortC){
 		try{
 			sServer = new ServerSocket(PortC);
@@ -90,7 +100,7 @@ public class ServerS extends Thread{
 				sClient = sServer.accept();
 				System.out.println("Arribo aqui");
 				dataIn = new DataInputStream(sClient.getInputStream());
-				dataOut = new DataOutputStream(sClient.getOutputStream());
+				objectOut = new ObjectOutputStream(sClient.getOutputStream());
 				
 				message = dataIn.readUTF();
 				
@@ -109,11 +119,12 @@ public class ServerS extends Thread{
 					dataOut.writeUTF(Logica.checkUser(message));
 				}
 				
-				/*if(message.startsWith("MAPES")){
-					dataOut.writeByte(Logica.enviaEscenaris());
-				}*/
+				if(message.startsWith("MAPES")){
+					objectOut.writeObject(Logica.enviaEscenaris());
+				}
 				dataIn.close();
 				dataOut.close();
+				objectOut.close();
 				sClient.close();
 			}catch(IOException e){
 				
