@@ -40,7 +40,7 @@ public class ConectorDB {
 	            }
 	        }
 	        catch(SQLException ex) {
-	            System.out.println("Problema al connecta-nos a la BBDD --> "+url);
+	            System.out.println("Problema al connecta-nos a la BBDD: "+url);
 	            ex.printStackTrace();
 	        }
 	        catch(ClassNotFoundException ex) {

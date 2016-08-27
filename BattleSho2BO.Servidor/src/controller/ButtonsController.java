@@ -3,11 +3,6 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-
-
-
-
 import java.sql.SQLException;
 
 import javax.swing.JTable;
@@ -20,11 +15,7 @@ import view.VistaUsuaris;
 import view.VistaEscenaris;
 
 /**
- * En aquesta classe es  gestionaran els events generats pels botons de les 
- * diferents vistes del servidor, concretament en tenim 3: Usuaris que ens mostra 
- * la taula amb els usuaris enregistrats a la BBDD, Escenaris que fa el mateix pero 
- * la base de dades dels Mapes oponents i finalment AfegirMapa que es troba dins
- * dels escenaris i obre un JFileChooser per a escollir quin mapa afegim.
+ * En aquesta classe es gestionaran els events generats pels botons de les diferents vistes del servidor, concretament en tenim 3: Usuaris que ens mostra la taula amb els usuaris enregistrats a la BBDD, Escenaris que fa el mateix pero la base de dades dels Mapes oponents i finalment AfegirMapa que es troba dins dels escenaris i obre un JFileChooser per a escollir quin mapa afegim.
  * @author Albert
  *
  */
