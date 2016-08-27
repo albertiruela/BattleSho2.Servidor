@@ -2,6 +2,11 @@ package model;
 
 
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -9,6 +14,8 @@ import java.sql.SQLException;
 
 
 
+
+import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
@@ -125,5 +132,67 @@ public class Logica {
 			e.printStackTrace();
 		}
 		return noExisteix;
+	}
+	public static LinkedList <Contrincant> enviaEscenaris() throws IOException{
+		LinkedList<Contrincant> contrincants = new LinkedList<Contrincant>();
+		
+		ResultSet rs = ConectorDB.selectAllMaps();
+		
+		try {
+			while (rs.next())
+				try {
+					{
+						Contrincant c = null;
+						String nom = rs.getString("Nom");
+						Date datacreacio = rs.getDate("DataCreacio");
+						Mapa mapa = fesMapa(nom);
+						Contrincant cont = new Contrincant(nom,datacreacio,mapa);
+						contrincants.add(cont);
+						
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return contrincants;	
+	}
+	
+	public static Mapa fesMapa(String nom) throws IOException{
+		
+		String linia;
+		FileReader f = new FileReader("mapes/"+nom);
+		BufferedReader b = new BufferedReader(f);
+		linia = b.readLine();
+		int n_vaixells_petits = Integer.parseInt(linia);
+		System.out.println(linia);
+		linia = b.readLine();
+		int n_vaixells_mitjans = Integer.parseInt(linia);
+		System.out.println(linia);
+		linia = b.readLine();
+		int n_vaixells_grans = Integer.parseInt(linia);
+		System.out.println(linia);
+		
+		linia = b.readLine();
+		String[][] taulell = new String[linia.length()][linia.length()];
+		
+		int fila = 0;
+		while (linia!="1" && linia !="2" && linia !="3" && linia != null) {
+			String[] parts = linia.split(" ");
+			//System.out.println(parts.length);
+			for(int i=0; i<parts.length; ++i) taulell[fila][i] = parts[i];	
+			for (int i=0; i<parts.length; ++i) System.out.println(taulell[fila][i]);
+			fila++;
+			linia = b.readLine();
+			System.out.println(linia);
+		}
+		
+		Mapa m = new Mapa (n_vaixells_petits,n_vaixells_mitjans, n_vaixells_grans, taulell);
+		return m;
 	}
 }

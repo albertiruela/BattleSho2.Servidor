@@ -1,8 +1,12 @@
 package model;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import javax.swing.SwingUtilities;
+
+
 
 
 import view.MainViewS;
@@ -51,6 +55,8 @@ public class MainServidor {
 					vistaServidor.registerController(controller);
 					server.iniciaServidor();
 					vistaServidor.setVisible(true);
+					
+					
 					
 						
 					

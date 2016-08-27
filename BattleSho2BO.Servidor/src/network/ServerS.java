@@ -82,6 +82,7 @@ public class ServerS extends Thread{
 	public void run(){
 
 		String message = new String();
+		//LinkedList<Contrincant> = new LinkedList<Contrincant>();
 		
 		while(escoltant){
 			try{
@@ -108,7 +109,9 @@ public class ServerS extends Thread{
 					dataOut.writeUTF(Logica.checkUser(message));
 				}
 				
-	
+				/*if(message.startsWith("MAPES")){
+					dataOut.writeByte(Logica.enviaEscenaris());
+				}*/
 				dataIn.close();
 				dataOut.close();
 				sClient.close();
