@@ -1,49 +1,57 @@
 package view;
 
 import java.awt.BorderLayout;
-
-
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
 
-import java.awt.event.ActionListener;
 
 import controller.ButtonsController;
-
+/**
+ * Classe que gestiona la creacio de la vista principal del servidor
+ * @author Albert
+ *
+ */
 public class MainViewS extends JFrame {
 
-	
+	/**
+	 * Panell on anira el titol principal
+	 */
 	private JPanel JPTitol1 = new JPanel();
+	/**
+	 * Panell on anire el subtitol
+	 */
 	private JPanel JPTitol2 = new JPanel(new FlowLayout());
+	/**
+	 * Panell amb GridLayout on aniran els botons tan d'usuaris com escenaris
+	 */
 	private JPanel JPBotons = new JPanel (new GridLayout(1,2));
-	
+	/**
+	 * Boto per mostrar la taula d'usuaris
+	 */
 	private static JButton jbUsuaris = new JButton("VistaUsuaris");
+	/**
+	 * Boto per mostrar la taula d'escenaris
+	 */
 	private static JButton jbEscenaris = new JButton("Escenaris");
-	
-	
+	/**
+	 * Label del titol principal
+	 */
 	private JLabel jlBattle = new JLabel("BattleSho2");
+	/**
+	 * Label del subtitol
+	 */
 	private JLabel jlServer = new JLabel ("SERVER");
 	
 	
 	
-	
+	/**
+	 * Instancia per a crear la vista principal
+	 */
 	public MainViewS() {
 		
 		setBounds(100,100,700,400);

@@ -17,20 +17,39 @@ import controller.ButtonsController;
 import controller.MouseClickTable;
 import network.ConectorDB;
 
-
+/**
+ * Classe encarregada de generar la vista amb la taula dels escenaris i dona opció a afegir-ne
+ * @author Albert
+ *
+ */
 
 public class VistaEscenaris extends JDialog {
-
+	/**
+	 * Panell principal del JDialog
+	 */
 	private final JPanel contentPanel = new JPanel();
+	/**
+	 * Panell on introduim el botó d'Accedir
+	 */
 	private JPanel jpAfegir = new JPanel(new GridLayout(1,2));
-	
+	/**
+	 * Taula on col·locarem els escenaris classificats pel nickname
+	 */
 	private JTable jtTaula = new JTable(); 
+	/**
+	 * Rebrem els escenaris en forma ResultSet
+	 */
 	private ResultSet rs ;
-	
 	private JButton jbAfegir0 = new JButton (""); 
+	/**
+	 * Botó amb el que activarem l'opció d'afegir mapes
+	 */
 	private JButton jbAfegir1 = new JButton ("Afegir Mapa"); 
 	
-	
+	/**
+	 * Insta a la creació de la vista dels escenaris
+	 * @throws SQLException
+	 */
 	public VistaEscenaris() throws SQLException {
 		
 		setTitle("ESCENARIS");
@@ -44,25 +63,25 @@ public class VistaEscenaris extends JDialog {
 		jbAfegir0.setVisible(false);
 		jbAfegir1.setVisible(true);
 		
-		
-		
 		rs = ConectorDB.selectAllMaps();
 		jtTaula = fesTaula(rs);
 		add(jtTaula, BorderLayout.CENTER);
 		add(jpAfegir, BorderLayout.SOUTH);
 	}
 	
-	public void registerControllers(MouseClickTable mct){
-		
-		this.jtTaula.addMouseListener(mct);
-				
+	public void registerControllers(MouseClickTable mct){	
+		this.jtTaula.addMouseListener(mct);		
 	}
 	
 	public void registerControllers1(ButtonsController bc){
 		jbAfegir1.setActionCommand("AFEGIRMAPA");
 		jbAfegir1.addActionListener(bc);
 	}
-	
+	/**
+	 * Funció que rep el ResultSet de la base de dades  i ho carrega a la taula que mostrarem
+	 * @param rs
+	 * @return
+	 */
 	public JTable fesTaula(ResultSet rs) {
 		
 		 JTable jtTable = new JTable();

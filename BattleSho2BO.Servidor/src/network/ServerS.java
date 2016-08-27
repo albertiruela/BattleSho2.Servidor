@@ -13,25 +13,47 @@ import model.Logica;
 
 import controller.ButtonsController;
 
-
+/**
+ * Classe que rep les peticions del Client
+ * @author Albert
+ *
+ */
 public class ServerS extends Thread{
 	
-	private boolean isOn;
-	
+	/**
+	 * Socket del servidor
+	 */
 	private static ServerSocket sServer;
 	
+	/**
+	 * boolea que mantindrà el servidor sempre escoltant peticions
+	 */
+	private boolean escoltant;
+	
+	/**
+	 * Socket del client
+	 */
 	private static Socket sClient;
-	
+	/**
+	 * Input del servidor per on entra la informació del client
+	 */
 	private DataInputStream dataIn;
-	
+	/**
+	 * Output per on sortira l'answer
+	 */
 	private static DataOutputStream dataOut;
-	
+	/**
+	 * Controlador
+	 */
 	private ButtonsController controller;
-	
+	/**
+	 * Creem el socket del servidor
+	 * @param PortC
+	 */
 	public ServerS(int PortC){
 		try{
 			sServer = new ServerSocket(PortC);
-			isOn = false;
+			escoltant = false;
 		}catch(IOException e){
 			e.printStackTrace();
 		}
@@ -39,23 +61,29 @@ public class ServerS extends Thread{
 	public void registerController(ButtonsController controller){
 		this.controller = controller;
 	}
-	
+	/**
+	 * Iniciem el servidor
+	 */
 	public void iniciaServidor(){
-		isOn = true;
+		escoltant = true;
 		super.start();
 		System.out.println("Obrint servidor...");
 	}
 	
-	
+	/**
+	 * Pausem el servidor
+	 */
 	public void aturaServidor(){
-		isOn = false;
+		escoltant = false;
 	}
-	
+	/**
+	 * Iniciem el servidor i el deixem en espera a noves peticions, rebem la informacio i e funcio del que rebem contestem el que demanen
+	 */
 	public void run(){
 
 		String message = new String();
 		
-		while(isOn){
+		while(escoltant){
 			try{
 				
 				sClient = sServer.accept();

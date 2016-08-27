@@ -4,20 +4,39 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+/**
+ * Classe des d'on connectem el Servidor i la BBDD i en realitzem les modificacions 
+ * @author Albert
+ *
+ */
 public class ConectorDB {
+	/**
+	 * usuari amb el que accedim a MYSQL
+	 */
 	static String userName;
-	
+	/**
+	 * password amb el que accedim a MYSQL
+	 */
 	static String password;
-	
+	/**
+	 * nom de la BBDD
+	 */
 	static String db;
-	
+	/**
+	 * Port que utilitzem per a la connexió
+	 */
 	static int port;
-	
+	/**
+	 * URL de vinculació amb MYSQL
+	 */
 	static String url = "jdbc:mysql://";
-	
+	/**
+	 * variable referent a la connexió
+	 */
 	static Connection conn = null;
-	
+	/**
+	 * comanda
+	 */
 	static Statement s;
 	
 	public ConectorDB(String usr, String pass, String db, int port, String ip) {
@@ -29,7 +48,9 @@ public class ConectorDB {
 		ConectorDB.url += ":"+port+"/";
 		ConectorDB.url += db;
 	}
-	
+	/**
+	 * Realitzem la connexió
+	 */
 	 public void connect() {
 	        try {
 	            Class.forName("com.mysql.jdbc.Driver");
@@ -48,7 +69,12 @@ public class ConectorDB {
 	        }
 
 	    }
-	 
+	 /**
+	  * Insertem el usuari 
+	  * @param nickname
+	  * @param password
+	  * @return boolea que informa si s'ha dut a terme
+	  */
 	
 	 public static boolean insertUser(String nickname, String password){
 
@@ -65,6 +91,10 @@ public class ConectorDB {
 	    	return true;
 	    }
 	 
+	 /**
+	  * Busca l'usuari a la BBDD a través del nickname i l'elimina
+	  * @param nickname
+	  */
 	 public static void deleteUser(String nickname){
 	    	String query = new String("DELETE FROM usuaris WHERE Nickname='"+nickname+"'");
 	    	try {
@@ -76,7 +106,10 @@ public class ConectorDB {
 	        }
 	    	
 	    }
-	 
+	 /**
+	  * Extreu tots els usuaris de la taula
+	  * @return un ResultSet amb els usuaris
+	  */
 	  public static ResultSet selectAllUsers(){
 	    	ResultSet rs = null;
 	    	String query = new String("SELECT * FROM usuaris");
@@ -89,7 +122,11 @@ public class ConectorDB {
 	        }
 			return rs;
 	    }
-	  
+	  /**
+	   * Extreiem un sol usuari de la base de dades
+	   * @param Nickname
+	   * @return ResultSet amb un usuari
+	   */
 	  public static ResultSet selectUser(String Nickname){
 	    	ResultSet rs = null;
 	    	String query = new String("SELECT * FROM usuaris WHERE Nickname='"+Nickname+"' LIMIT 1");
@@ -102,7 +139,10 @@ public class ConectorDB {
 	        }
 			return rs;
 	    }
-	  
+	  /**
+	   * Registra la data del darrer accés de l'usuari a la plataforma
+	   * @param nickname
+	   */
 	  public static void updateAccessDate(String nickname){
 	    	String query = new String("UPDATE usuaris SET DataUltimAcces = NOW() WHERE nickname='"+nickname+"'");
 	    	try {
@@ -114,7 +154,10 @@ public class ConectorDB {
 	        }
 	    	
 	    }
-	  
+	  /**
+	   * Retorna tots els Mapes que trobem a la taula de escenaris
+	   * @return ResultSet amb tots els mapes
+	   */
 	  public static ResultSet selectAllMaps(){
 	    	ResultSet rs = null;
 	    	String query = new String("SELECT * FROM escenaris");
@@ -127,7 +170,10 @@ public class ConectorDB {
 	        }
 			return rs;
 	    }
-	  
+	  /**
+	   * Eliminem un mapa de la taula escenaris a través de passar el nom
+	   * @param nom
+	   */
 	  public static void deleteMap(String nom){
 	    	String query = new String("DELETE FROM escenaris WHERE Nom='"+nom+"'");
 	    	try {
@@ -139,7 +185,12 @@ public class ConectorDB {
 	        }
 	    	
 	    }
-	  
+	  /**
+	   * Inserim un mapa a la taula escenaris
+	   * @param nom
+	   * @param path
+	   * @return boolea conforme si s'ha fet correctament
+	   */
 	  public static boolean insertMap(String nom, String path){
 
 	        String query = new String("INSERT INTO escenaris (Nom,Path) VALUES ('"+nom+"','"+path+"');");
@@ -155,7 +206,9 @@ public class ConectorDB {
 	    	return true;
 	    }
 	 
-	 
+	 /**
+	  * Desconnectem la base de dades del Servidor
+	  */
 	 public void disconnect(){
 	    	try {
 				conn.close();

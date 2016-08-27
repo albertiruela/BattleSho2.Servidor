@@ -12,8 +12,16 @@ import network.ConectorDB;
 import network.ServerS;
 import model.Configuracio;
 
+/**
+ * Main des d'on executem per ordre les vistes, la connexió amb la BBDD, iniciem el servidor i registrem els controladors 
+ * @author Albert
+ *
+ */
 public class MainServidor {
-
+	/**
+	 * Funcio principal del main
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		//TODO Auto-generated method stub
 		SwingUtilities.invokeLater(new Runnable(){

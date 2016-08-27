@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * Classe que ens carrega un fitxer amb path i nom
+ * @author Albert
+ *
+ */
 public class Fitxer {
 
 	
@@ -13,19 +17,19 @@ public class Fitxer {
 		
 		
 	}
-
+	/** retorna el path del escenari*/
 	public String getPath() {
 		return Path;
 	}
-
+	/** fixa el path*/
 	public void setPath(String path) {
 		Path = path;
 	}
-
+	/** Retorna el nom*/
 	public String getNom() {
 		return Nom;
 	}
-
+	/** fixa el nom*/ 
 	public void setNom(String nom) {
 		Nom = nom;
 	}
