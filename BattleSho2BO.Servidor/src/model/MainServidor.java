@@ -1,13 +1,14 @@
 package model;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import javax.swing.SwingUtilities;
 
 
 
-//import network.ConectorDB;
-//import network.ServerS;
+
 import view.MainViewS;
 import view.VistaUsuaris;
 import controller.ButtonsController;
@@ -15,10 +16,18 @@ import network.ConectorDB;
 import network.ServerS;
 import model.Configuracio;
 
+/**
+ * Main des d'on executem per ordre les vistes, la connexió amb la BBDD, iniciem el servidor i registrem els controladors 
+ * @author Albert
+ *
+ */
 public class MainServidor {
-
+	/**
+	 * Funcio principal del main
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		//TODO Auto-generated method stub
 		SwingUtilities.invokeLater(new Runnable(){
 
 			@Override
@@ -41,24 +50,13 @@ public class MainServidor {
 					
 					ServerS server = new ServerS(conf.getPortC());
 					ButtonsController controller = new ButtonsController(vistaServidor,vistaUsuaris);
-					//BotoClick bc = new BotoClick(vistaUsuaris);
+					
 					
 					vistaServidor.registerController(controller);
 					server.iniciaServidor();
 					vistaServidor.setVisible(true);
 					
 					
-					/*Time time = new Time();
-					Logics logics = new Logics(time);
-					
-					ButtonsController controller = new ButtonsController(VistaPrincipal,server,logics);
-					
-					
-					server.registerController(controller);
-					time.registerController(controller);
-					logics.registerController(controller);
-					server.startServer();
-					serverView.setVisible(true);*/
 					
 					
 				//}
