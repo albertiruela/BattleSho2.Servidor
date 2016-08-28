@@ -80,7 +80,7 @@ public class ServerS extends Thread{
 	public void iniciaServidor(){
 		escoltant = true;
 		super.start();
-		System.out.println("Obrint servidor...");
+		System.out.println("Obrint servidor..");
 	}
 	
 	/**
@@ -101,15 +101,14 @@ public class ServerS extends Thread{
 			try{
 				
 				sClient = sServer.accept();
-				System.out.println("Arribo aqui");
+				
 				dataIn = new ObjectInputStream(sClient.getInputStream());
-				System.out.println("aqui?");
+				
 				dataOut = new ObjectOutputStream(sClient.getOutputStream());
 				//objectOut = new ObjectOutputStream(sClient.getOutputStream());
-				System.out.println("o aqui?");
+				
 				message = (String)dataIn.readObject();
 				
-				System.out.println(message);
 				
 				if (message.startsWith("ADD")){
 						
@@ -125,12 +124,12 @@ public class ServerS extends Thread{
 				}
 				
 				if(message.equals("MAPES")){
-					System.out.println("uno");
+			
 					dataOut.writeObject(Logica.enviaEscenaris());
 				}
 				
 				if(message.startsWith("GUANYADA")){
-					System.out.println("guanyada");
+					
 					ConectorDB.insertPartidaGuanyada();
 				}
 				
@@ -140,7 +139,7 @@ public class ServerS extends Thread{
 				}
 				dataIn.close();
 				dataOut.close();
-				//objectOut.close();
+				
 				sClient.close();
 			}catch(IOException e){
 				
