@@ -153,7 +153,6 @@ public class Logica {
 						Date datacreacio = rs.getDate("DataCreacio");
 						String path = rs.getString("Path");
 						Taulell mapa = new Taulell();
-						nom = nom.substring(1, nom.length()-1);
 						mapa.carregar_taulell(nom);
 						System.out.println("ESTIC AQUIIIIII");
 						System.out.println(nom);
