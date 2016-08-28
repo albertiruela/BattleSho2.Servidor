@@ -16,6 +16,8 @@ import java.io.IOException;
 
 
 
+
+
 import model.Contrincant;
 import model.Logica;
 import controller.ButtonsController;
@@ -104,21 +106,21 @@ public class ServerS extends Thread{
 				dataOut = new ObjectOutputStream(sClient.getOutputStream());
 				//objectOut = new ObjectOutputStream(sClient.getOutputStream());
 				
-				message = dataIn.readUTF();
+				message = (String)dataIn.readObject();
 				
 				System.out.println(message);
 				
 				if (message.startsWith("ADD")){
 						
 					if(Logica.addUser(message)){
-						dataOut.writeUTF("OK");
+						dataOut.writeObject("OK");
 					}else{
-						dataOut.writeUTF("KO");
+						dataOut.writeObject("KO");
 					}		
 				}
 				
 				if (message.startsWith("LOG")){
-					dataOut.writeUTF(Logica.checkUser(message));
+					dataOut.writeObject(Logica.checkUser(message));
 				}
 				
 				if(message.equals("MAPES")){
@@ -131,6 +133,9 @@ public class ServerS extends Thread{
 				sClient.close();
 			}catch(IOException e){
 				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 	
 		}
