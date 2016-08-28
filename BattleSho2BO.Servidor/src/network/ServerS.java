@@ -2,11 +2,13 @@ package network;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.ServerSocket;
 import java.util.LinkedList;
 import java.io.IOException;
+
 
 
 
@@ -42,11 +44,11 @@ public class ServerS extends Thread{
 	/**
 	 * Input del servidor per on entra la informació del client
 	 */
-	private DataInputStream dataIn;
+	private ObjectInputStream dataIn;
 	/**
 	 * Output per on sortira l'answer
 	 */
-	private static DataOutputStream dataOut;
+	private static ObjectOutputStream dataOut;
 	/**
 	 * Controlador
 	 */
@@ -98,8 +100,8 @@ public class ServerS extends Thread{
 				
 				sClient = sServer.accept();
 				System.out.println("Arribo aqui");
-				dataIn = new DataInputStream(sClient.getInputStream());
-				dataOut = new DataOutputStream(sClient.getOutputStream());
+				dataIn = new ObjectInputStream(sClient.getInputStream());
+				dataOut = new ObjectOutputStream(sClient.getOutputStream());
 				//objectOut = new ObjectOutputStream(sClient.getOutputStream());
 				
 				message = dataIn.readUTF();
@@ -119,10 +121,10 @@ public class ServerS extends Thread{
 					dataOut.writeUTF(Logica.checkUser(message));
 				}
 				
-				/*if(message.equals("MAPES")){
+				if(message.equals("MAPES")){
 					System.out.println("uno");
 					objectOut.writeObject(Logica.enviaEscenaris());
-				}*/
+				}
 				dataIn.close();
 				dataOut.close();
 				//objectOut.close();

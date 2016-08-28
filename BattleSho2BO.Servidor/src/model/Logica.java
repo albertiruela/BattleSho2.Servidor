@@ -151,7 +151,8 @@ public class Logica {
 						Contrincant c = null;
 						String nom = rs.getString("Nom");
 						Date datacreacio = rs.getDate("DataCreacio");
-						Mapa mapa = fesMapa(nom);
+						Taulell mapa = new Taulell();
+						mapa.carregar_taulell(nom);
 						System.out.println("ESTIC AQUIIIIII");
 						Contrincant cont = new Contrincant(nom,datacreacio,mapa);
 						contrincants.add(cont);
@@ -175,7 +176,7 @@ public class Logica {
 	 * @return mapa a enviar per formar contrincant
 	 * @throws IOException
 	 */
-	public static Mapa fesMapa(String nom) throws IOException{
+	/*public static Mapa fesMapa(String nom) throws IOException{
 		
 		String linia;
 		FileReader f = new FileReader("mapes/"+nom);
@@ -206,5 +207,5 @@ public class Logica {
 		
 		Mapa m = new Mapa (n_vaixells_petits,n_vaixells_mitjans, n_vaixells_grans, taulell);
 		return m;
-	}
+	}*/
 }
