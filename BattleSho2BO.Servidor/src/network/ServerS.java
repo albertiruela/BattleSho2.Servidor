@@ -51,10 +51,9 @@ public class ServerS extends Thread{
 	 * Controlador
 	 */
 	private ButtonsController controller;
-	/**
-	 * Creem un ObjectOutputStream per passar els contrincants
-	 */
+	
 	private static ObjectOutputStream objectOut;
+	
 	/**
 	 * Creem el socket del servidor
 	 * @param PortC
@@ -92,7 +91,7 @@ public class ServerS extends Thread{
 	public void run(){
 
 		String message = new String();
-		//LinkedList<Contrincant> = new LinkedList<Contrincant>();
+		
 		
 		while(escoltant){
 			try{
@@ -100,7 +99,8 @@ public class ServerS extends Thread{
 				sClient = sServer.accept();
 				System.out.println("Arribo aqui");
 				dataIn = new DataInputStream(sClient.getInputStream());
-				objectOut = new ObjectOutputStream(sClient.getOutputStream());
+				dataOut = new DataOutputStream(sClient.getOutputStream());
+				//objectOut = new ObjectOutputStream(sClient.getOutputStream());
 				
 				message = dataIn.readUTF();
 				
@@ -119,12 +119,13 @@ public class ServerS extends Thread{
 					dataOut.writeUTF(Logica.checkUser(message));
 				}
 				
-				if(message.startsWith("MAPES")){
+				/*if(message.equals("MAPES")){
+					System.out.println("uno");
 					objectOut.writeObject(Logica.enviaEscenaris());
-				}
+				}*/
 				dataIn.close();
 				dataOut.close();
-				objectOut.close();
+				//objectOut.close();
 				sClient.close();
 			}catch(IOException e){
 				

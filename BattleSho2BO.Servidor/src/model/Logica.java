@@ -133,6 +133,11 @@ public class Logica {
 		}
 		return noExisteix;
 	}
+	/**
+	 * funcio en la que preparem els escenaris per a ser enviats al client i gestionats per la partida
+	 * @return Linked list de tots els contrincants possibles
+	 * @throws IOException
+	 */
 	public static LinkedList <Contrincant> enviaEscenaris() throws IOException{
 		LinkedList<Contrincant> contrincants = new LinkedList<Contrincant>();
 		
@@ -142,10 +147,12 @@ public class Logica {
 			while (rs.next())
 				try {
 					{
+						
 						Contrincant c = null;
 						String nom = rs.getString("Nom");
 						Date datacreacio = rs.getDate("DataCreacio");
 						Mapa mapa = fesMapa(nom);
+						System.out.println("ESTIC AQUIIIIII");
 						Contrincant cont = new Contrincant(nom,datacreacio,mapa);
 						contrincants.add(cont);
 						
@@ -162,7 +169,12 @@ public class Logica {
 		
 		return contrincants;	
 	}
-	
+	/**
+	 * a partir del nom extret de la bbdd busquem el mapa i el carreguem en una variable tipus mapa
+	 * @param nom
+	 * @return mapa a enviar per formar contrincant
+	 * @throws IOException
+	 */
 	public static Mapa fesMapa(String nom) throws IOException{
 		
 		String linia;
