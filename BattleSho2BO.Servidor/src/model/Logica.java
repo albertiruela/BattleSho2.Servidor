@@ -140,9 +140,9 @@ public class Logica {
 	 */
 	public static LinkedList <Contrincant> enviaEscenaris() throws IOException{
 		LinkedList<Contrincant> contrincants = new LinkedList<Contrincant>();
-		
+		System.out.println("anem a llegir a DB");
 		ResultSet rs = ConectorDB.selectAllMaps();
-		
+		System.out.println("lectura feta");
 		try {
 			while (rs.next())
 				try {
@@ -151,12 +151,18 @@ public class Logica {
 						Contrincant c = null;
 						String nom = rs.getString("Nom");
 						Date datacreacio = rs.getDate("DataCreacio");
+						String path = rs.getString("Path");
 						Taulell mapa = new Taulell();
+						nom = nom.substring(1, nom.length()-1);
 						mapa.carregar_taulell(nom);
 						System.out.println("ESTIC AQUIIIIII");
+						System.out.println(nom);
+						System.out.println(path);
+						System.out.println(datacreacio);
 						Contrincant cont = new Contrincant(nom,datacreacio,mapa);
+						System.out.println("new contrincant");
 						contrincants.add(cont);
-						
+						System.out.println("contrincant afegit");
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -166,7 +172,7 @@ public class Logica {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println(contrincants.size());
 		
 		return contrincants;	
 	}

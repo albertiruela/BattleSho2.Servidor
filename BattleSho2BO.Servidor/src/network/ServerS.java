@@ -103,9 +103,10 @@ public class ServerS extends Thread{
 				sClient = sServer.accept();
 				System.out.println("Arribo aqui");
 				dataIn = new ObjectInputStream(sClient.getInputStream());
+				System.out.println("aqui?");
 				dataOut = new ObjectOutputStream(sClient.getOutputStream());
 				//objectOut = new ObjectOutputStream(sClient.getOutputStream());
-				
+				System.out.println("o aqui?");
 				message = (String)dataIn.readObject();
 				
 				System.out.println(message);
@@ -125,7 +126,17 @@ public class ServerS extends Thread{
 				
 				if(message.equals("MAPES")){
 					System.out.println("uno");
-					objectOut.writeObject(Logica.enviaEscenaris());
+					dataOut.writeObject(Logica.enviaEscenaris());
+				}
+				
+				if(message.startsWith("GUANYADA")){
+					System.out.println("guanyada");
+					ConectorDB.insertPartidaGuanyada();
+				}
+				
+				if(message.startsWith("PERDUDA")){
+					
+					ConectorDB.insertPartidaPerduda();
 				}
 				dataIn.close();
 				dataOut.close();

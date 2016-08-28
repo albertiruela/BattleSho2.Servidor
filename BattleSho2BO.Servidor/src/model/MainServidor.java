@@ -36,6 +36,7 @@ public class MainServidor {
 				Configuracio conf = new Configuracio();
 				
 				if(conf.fes()){
+					
 					ConectorDB conn = new ConectorDB(conf.getUsuari(), conf.getPassword(), conf.getNomBD(), Integer.parseInt(conf.getPortBD()), conf.getIP());
 					conn.connect();
 					

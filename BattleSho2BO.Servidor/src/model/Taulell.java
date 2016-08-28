@@ -2,15 +2,17 @@ package model;
 
 import java.awt.Point;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class Taulell.
  */
-public class Taulell {
+public class Taulell implements Serializable{
 	
 	private char[][] taulell;
 
@@ -38,6 +40,7 @@ public class Taulell {
 	 */
 	public void carregar_taulell(String fitxer) throws IOException {
 		String linia;
+		System.out.println(fitxer);
 		FileReader f = new FileReader(fitxer);
 		BufferedReader b = new BufferedReader(f);
 		linia = b.readLine();

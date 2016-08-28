@@ -39,6 +39,8 @@ public class ConectorDB {
 	 */
 	static Statement s;
 	
+	private static String usuariActual;
+	
 	public ConectorDB(String usr, String pass, String db, int port, String ip) {
 		ConectorDB.userName = usr;
 		ConectorDB.password = pass;
@@ -137,6 +139,7 @@ public class ConectorDB {
 	        } catch (SQLException ex) {
 	            System.out.println("Problema al recuperar el usuari: " + ex.getSQLState());
 	        }
+	    	usuariActual = Nickname;
 			return rs;
 	    }
 	  /**
@@ -204,7 +207,7 @@ public class ConectorDB {
 	            return false;
 	        }
 	    	return true;
-	    }
+	   }
 	 
 	 /**
 	  * Desconnectem la base de dades del Servidor
@@ -217,7 +220,53 @@ public class ConectorDB {
 			}
 	    }
 	 
-	 
+	public static void insertPartidaGuanyada(){
+		int partides = 0;
+		ResultSet user = selectUser(usuariActual);
+		try {
+			while(user.next()){
+				partides = (int) user.getObject("PartidesGuanyades")+1;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String query = new String("UPDATE usuaris SET PartidesGuanyades='"+partides+"' WHERE Nickname='"+usuariActual+"'");
+		System.out.println(partides);
+		System.out.println(usuariActual);
+		try {
+			System.out.println("JA");
+			s =(Statement) conn.createStatement();
+			s.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("done");
+	}
 	
+	public static void insertPartidaPerduda(){
+		int partides = 0;
+		System.out.println(usuariActual);
+		ResultSet user = selectUser(usuariActual);
+		System.out.println("usuari trobat");
+		try {
+			while(user.next()){
+				partides = (int) user.getObject("PartidesPerdudes")+1;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(partides);
+		String query = new String("UPDATE usuaris SET PartidesPerdudes='"+partides+"' WHERE Nickname='"+usuariActual+"'");
 	
+		try {
+			s =(Statement) conn.createStatement();
+			s.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
