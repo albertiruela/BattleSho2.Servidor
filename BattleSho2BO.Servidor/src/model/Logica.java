@@ -45,8 +45,7 @@ public class Logica {
 		message = message.substring(4);
 		info = message.split("/");
 		
-		System.out.println(info[0]);
-		System.out.println(info[1]);
+		
 		if(checkUserExists(info[0])){
 			if(checkPassword(info[1])){
 				if (ConectorDB.insertUser(info[0],info[1])){
@@ -70,14 +69,13 @@ public class Logica {
 		message = message.substring(4);
 		info = message.split("/");
 		try {	
-			System.out.println("nickname:" + info[0]);
+			
 			ResultSet usuari = ConectorDB.selectUser(info[0]);
 
-		   
 			try {
 				usuari.next();
 				String password = usuari.getString("Password");
-				System.out.println(password);
+				
 				if(password.equals(info[1])){
 					answer = "OK";
 					ConectorDB.updateAccessDate(info[0]);
@@ -140,9 +138,9 @@ public class Logica {
 	 */
 	public static LinkedList <Contrincant> enviaEscenaris() throws IOException{
 		LinkedList<Contrincant> contrincants = new LinkedList<Contrincant>();
-		System.out.println("anem a llegir a DB");
+		
 		ResultSet rs = ConectorDB.selectAllMaps();
-		System.out.println("lectura feta");
+		
 		try {
 			while (rs.next())
 				try {
@@ -154,14 +152,9 @@ public class Logica {
 						String path = rs.getString("Path");
 						Taulell mapa = new Taulell();
 						mapa.carregar_taulell(nom);
-						System.out.println("ESTIC AQUIIIIII");
-						System.out.println(nom);
-						System.out.println(path);
-						System.out.println(datacreacio);
 						Contrincant cont = new Contrincant(nom,datacreacio,mapa);
-						System.out.println("new contrincant");
 						contrincants.add(cont);
-						System.out.println("contrincant afegit");
+						
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -171,46 +164,9 @@ public class Logica {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(contrincants.size());
+		
 		
 		return contrincants;	
 	}
-	/**
-	 * a partir del nom extret de la bbdd busquem el mapa i el carreguem en una variable tipus mapa
-	 * @param nom
-	 * @return mapa a enviar per formar contrincant
-	 * @throws IOException
-	 */
-	/*public static Mapa fesMapa(String nom) throws IOException{
-		
-		String linia;
-		FileReader f = new FileReader("mapes/"+nom);
-		BufferedReader b = new BufferedReader(f);
-		linia = b.readLine();
-		int n_vaixells_petits = Integer.parseInt(linia);
-		System.out.println(linia);
-		linia = b.readLine();
-		int n_vaixells_mitjans = Integer.parseInt(linia);
-		System.out.println(linia);
-		linia = b.readLine();
-		int n_vaixells_grans = Integer.parseInt(linia);
-		System.out.println(linia);
-		
-		linia = b.readLine();
-		String[][] taulell = new String[linia.length()][linia.length()];
-		
-		int fila = 0;
-		while (linia!="1" && linia !="2" && linia !="3" && linia != null) {
-			String[] parts = linia.split(" ");
-			//System.out.println(parts.length);
-			for(int i=0; i<parts.length; ++i) taulell[fila][i] = parts[i];	
-			for (int i=0; i<parts.length; ++i) System.out.println(taulell[fila][i]);
-			fila++;
-			linia = b.readLine();
-			System.out.println(linia);
-		}
-		
-		Mapa m = new Mapa (n_vaixells_petits,n_vaixells_mitjans, n_vaixells_grans, taulell);
-		return m;
-	}*/
+	
 }

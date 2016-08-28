@@ -1,7 +1,7 @@
 {
   "PortBD":"3306",
   "IP":"localhost",
-  "NomBD":"battlesho2",
+  "NomBD":"dpo2",
   "Usuari":"root",
   "Password":"",
   "PortC":"5200"

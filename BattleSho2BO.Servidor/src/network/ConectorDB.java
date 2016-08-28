@@ -219,7 +219,9 @@ public class ConectorDB {
 				System.out.println("Problema al tancar la connexio --> " + e.getSQLState());
 			}
 	    }
-	 
+	 /**
+	  * Un cop finalitzada la partida modifiquem la base de dades
+	  */
 	public static void insertPartidaGuanyada(){
 		int partides = 0;
 		ResultSet user = selectUser(usuariActual);
@@ -232,10 +234,9 @@ public class ConectorDB {
 			e.printStackTrace();
 		}
 		String query = new String("UPDATE usuaris SET PartidesGuanyades='"+partides+"' WHERE Nickname='"+usuariActual+"'");
-		System.out.println(partides);
-		System.out.println(usuariActual);
+		
 		try {
-			System.out.println("JA");
+			
 			s =(Statement) conn.createStatement();
 			s.executeUpdate(query);
 		} catch (SQLException e) {
@@ -244,12 +245,13 @@ public class ConectorDB {
 		}
 		System.out.println("done");
 	}
-	
+	/**
+	 * Un cop finalitzada la partida modifiquem la base de dades
+	 */
 	public static void insertPartidaPerduda(){
 		int partides = 0;
-		System.out.println(usuariActual);
 		ResultSet user = selectUser(usuariActual);
-		System.out.println("usuari trobat");
+		
 		try {
 			while(user.next()){
 				partides = (int) user.getObject("PartidesPerdudes")+1;
@@ -258,7 +260,6 @@ public class ConectorDB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(partides);
 		String query = new String("UPDATE usuaris SET PartidesPerdudes='"+partides+"' WHERE Nickname='"+usuariActual+"'");
 	
 		try {
